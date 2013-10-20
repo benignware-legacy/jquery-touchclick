@@ -1,12 +1,12 @@
 jquery-touchclick
 =================
 
-JQuery-Plugin triggers click-listeners on touch-events in order to remove delay
+JQuery-Plugin that triggers click on touch-events in order to remove delay
 
 Features
 --------
 * Generic approach
-* No custom events or other hacks needed
+* No custom events needed
 * Accounts for scrolling gestures
 
 Example
