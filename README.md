@@ -1,4 +1,4 @@
 jquery-touchclick
 =================
 
-JQuery-Plugin that replaces clicks with touch-events on touch-devices
+JQuery-Plugin for generic trigger of click-listeners on touch-events
