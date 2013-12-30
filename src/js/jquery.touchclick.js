@@ -1,12 +1,16 @@
-// Ensure private scope + aliases
-(function ( $, window) {
++function ( $, window) {
   
-  var pluginName = 'touchClick';
+  window.console = window.console || {
+    log: function() {}, 
+    info: function() {}
+  };
+  
+  var pluginName = 'touchclick';
   
   var defaults = {
     draggingTimeout: 100, 
     scrollingTimeout: 750, 
-    preventClickTimeout: 10
+    preventClickTimeout: 500
   };
   
   function getOverflowContainer(elem) {
@@ -29,7 +33,6 @@
     
     var touchClick = this;
     
-    
     var $element = $(element);
     var $window = $(window);
     
@@ -43,9 +46,8 @@
     var touchStartScrollPos = null;
     var scrollingTimeoutId = null;
     
-    var preventClickTimeoutId = null;
-    
     $element.bind('touchstart', function(event) {
+      
       touchStartScrollPos = null;
       overflowContainer = getOverflowContainer(event.target);
       if (overflowContainer) {
@@ -57,14 +59,16 @@
       }
       window.clearTimeout(draggingTimeoutId);
       window.clearTimeout(scrollingTimeoutId);
-      window.clearTimeout(preventClickTimeoutId);
       dragging = false;
       scrolling = false;
       touchStartElement = event.target;
       
+      $(event.target).unbind('scroll', scrollHandler);
       if (overflowContainer && (overflowContainer.scrollHeight > 0 || overflowContainer.scrollWidth > 0)) {
         $(overflowContainer).bind('scroll', scrollHandler);
       }
+      
+      $(event.target).unbind('click', preventClickHandler);
       
     });
     
@@ -83,34 +87,41 @@
       }
     });
     
-    var clicked = false;
-	
-	/*
-	// test listener
-    $element.bind('click', function(event) {
-        console.log("TEST CLICK", event.target);
-    });
-    */
-    
-    function preventClickHandler(event) {
-      if (event.originalEvent == window.event) {
-        event.preventDefault();
+    function preventClickHandler(event, custom) {
+      
+      
+      
+      if (!custom) {
+        // prevent original event
+        //event.preventDefault();
+        // prevent propagation
         event.stopImmediatePropagation();
-        window.clearTimeout(preventClickTimeoutId);
-        preventClickTimeoutId = window.setTimeout(function() {
-          $(this).unbind('click', preventClickHandler);
-        }, options.preventClickTimeout);
+        $(this).unbind('click', preventClickHandler);
+        
+      } else {
+        // custom click actions
+        
+        //$(event.target).focus();
+        
+        // open links 
+        window.setTimeout(function() {
+          if (custom && !event.isDefaultPrevented()) {
+            var a = $(event.target).is('a[href]') ? event.target : $(event.target).parents('a[href]')[0];
+            if (a && a.href) {
+              window.location.href = a.href;
+            }
+          }
+        }, 1);
       }
     }
     
     $element.bind('touchend', function(event) {
       
+      $(event.target).unbind('click', preventClickHandler);
+      
       if (!scrolling && !dragging && event.target == touchStartElement) {
         
-        $(event.target).trigger('click');
-        
         $(event.target).bind('click', preventClickHandler);
-        
         
         var events = jQuery._data(event.target).events;
         if (events && events['click'] && events['click'].length > 1) {
@@ -118,8 +129,15 @@
           onClickHandlers.splice(0, 0, onClickHandlers.pop());
         }
         
-        //event.preventDefault();
-        //event.stopImmediatePropagation();
+        $(event.target).trigger({
+          type: 'click', 
+          bubbles: true
+        }, [true]);
+        
+        $(event.target).focus();
+        
+        event.preventDefault();
+        event.stopImmediatePropagation();
       }
       
       window.clearTimeout(draggingTimeoutId);
@@ -139,28 +157,18 @@
       }, options.scrollingTimeout);
     }
     
-    
   };
   
 
   // bootstrap plugin
-  
   $.fn[pluginName] = function(options) {
-      
-      options = $.extend({}, defaults, options);
-
-      return this.each(function() {
-  
-          if (!$(this).data(pluginName)) {
-            
-              $(this).data(pluginName, new pluginClass(this, options));
-  
-          }
-          
-          return $(this);
-  
+    options = $.extend({}, defaults, options);
+    return this.each(function() {
+      if (!$(this).data(pluginName)) {
+          $(this).data(pluginName, new pluginClass(this, options));
+      }
+      return $(this);
     });
-
   };
 
-})( jQuery, window );
+}( jQuery, window );

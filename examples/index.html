@@ -1,40 +1,57 @@
 <!DOCTYPE HTML>
 <html>
   <head>
-	    <meta charset="utf-8"/>
-	    
-	    <!-- example of jquery checkview component -->
-	    
-	    <title>TouchClick</title>
-	    
-	    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-	    
-	    <link href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">
-	    <link href="../src/css/jquery-checkview.bootstrap.css" rel="stylesheet">
-	    
-	    <script src="http://codeorigin.jquery.com/jquery-1.10.2.min.js"></script>
-	    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
-	    
-	    <script src="../src/js/jquery.touchClick.js"></script>
-	    
+    <meta charset="utf-8"/>
+    
+    <!-- example of jquery checkview component -->
+    
+    <title>TouchClick</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <link href="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
+    <!--<link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-combined.min.css" rel="stylesheet">-->
+    
+    
+    <link href="css/datepicker.css" rel="stylesheet">
+    <link href="css/bootstrap-select.css" rel="stylesheet">
+    <link href="css/selectize.bootstrap3.css" rel="stylesheet">
+    
+    <script src="http://codeorigin.jquery.com/jquery-1.10.2.min.js"></script>
+    
+    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+    <!--<script src="http://netdna.bootstrapcdn.com/bootstrap/2.3.1/js/bootstrap.min.js"></script>-->
+    
+    <script src="js/bootstrap-datepicker.js"></script>
+    <script src="js/bootstrap-select.js"></script>
+    <script src="js/selectize.min.js"></script>
+    
+    <script src="../src/js/jquery.touchclick.js"></script>
+    
 		<script>
+		
 			
 			$(document).ready(function() {
+			  
+			  // init touchclick plugin
+        $("body").touchclick();
 				
-				// init touchclick plugin
-				$("body").touchClick();
+				// init example controls
 				
-				// bind click listener
-				$("a[href]").bind('click', function(event) {
-					alert('link clicked');
-					event.preventDefault();
+				$('#button').on('click', function(e) {
+				  alert('click');
 				});
+				
+				$('.datepicker').datepicker().attr('readonly', 'readonly');
+				
+				$('.selectpicker').selectpicker();
+				
+				$("select.selectize", this).selectize();
 
 			});
 			
 			
 		</script>
-		
 		
 	</head>
 	<body>
@@ -49,11 +66,78 @@
 		</header>
 
 
-  		<div class="container">
-			<h2>Please open this page on a touch-device</h2>
-			<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient <a href="http://google.de">Google</a>, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. </p>
-			<p>Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus. Phasellus viverra nulla ut metus varius laoreet. Quisque rutrum. Aenean imperdiet. Etiam ultricies nisi vel augue. Curabitur ullamcorper ultricies nisi. Nam eget dui. Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit amet adipiscing sem neque sed ipsum. Nam quam nunc, blandit vel, luctus pulvinar, hendrerit id, lorem. Maecenas nec odio et ante tincidunt tempus. Donec vitae sapien ut libero venenatis faucibus. Nullam quis ante. Etiam sit amet orci eget eros faucibus tincidunt. Duis leo. Sed fringilla mauris sit amet nibh. Donec sodales sagittis magna. Sed consequat, leo eget bibendum sodales, augue velit cursus nunc.</p>
-		
+		<div class="container">
+		  
+		  <h2>Please open this page on a touch-device</h2>
+		  
+		  
+		  <h3>Native form controls</h3>
+		  <div class="row">
+		    <div class="col-md-4">
+		      
+		      <form role="form">
+  		      <div class="form-group">
+  		        <label>Textfield</label>
+  		        <input type="text" class="form-control"/>
+  		      </div>
+  		      
+  		      <div class="form-group">
+    		      <select>
+                <option value="volvo">Volvox</option>
+                <option value="saab">Saab</option>
+              </select>
+  		      </div>
+  		      
+  		      <div class="checkbox">
+              <label><input type="checkbox"/> Check me</label>
+            </div>
+  		      
+  		      
+  		      
+            <button type="button" id="button" class="btn btn-primary">Touch me</button>
+            
+          </form>
+          
+		    </div>
+		  </div>
+
+      <p>
+        Link: 
+        <a href="http://google.com">Come back</a>
+      </p>
+      
+
+      <div class="btn-group">
+        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+          Action <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu" role="menu">
+          <li><a href="#">Action</a></li>
+          <li><a href="#">Another action</a></li>
+          <li><a href="#">Something else here</a></li>
+          <li class="divider"></li>
+          <li><a href="#">Separated link</a></li>
+        </ul>
+      </div>
+      
+      <h3>Bootstrap Datepicker</h3>
+      <input class="datepicker" value="2013-09-12"/>
+      
+      <h3>Bootstrap Selectpicker</h3>
+      <select class="selectpicker">
+        <option value="volvo">Volvox</option>
+        <option value="saab">Saab</option>
+      </select> 
+      
+      <h3>Selectize</h3>
+      <select class="selectize" name="test" multiple="multiple">
+        <option value="Anna">Anna</option>
+        <option value="Bell">Bell</option>
+      </select> 
+    
+      
+      
+      
 		</div>
 		
 	</body>
