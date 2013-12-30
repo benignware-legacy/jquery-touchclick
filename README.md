@@ -35,5 +35,5 @@ gem 'jquery-benignware-rails'
 
 Require the javascript in your application.js
 ```
-//= require benignware/jquery.touchClick.js
+//= require benignware/jquery.touchclick.js
 ```
