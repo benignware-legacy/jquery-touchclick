@@ -14,13 +14,13 @@ Example
 
 ```
 $(document).ready(function() {
-	$("body").touchClick();
+	$("body").touchclick();
 });
 ```
 
 Get access to the plugin-instance:
 ```
-var touchClick = $("body").data('touchClick');
+var touchClick = $("body").data('touchclick');
 ```
 
 
