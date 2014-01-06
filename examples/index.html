@@ -26,6 +26,8 @@
     <script src="js/bootstrap-select.js"></script>
     <script src="js/selectize.min.js"></script>
     
+    <script src="js/jquery.checkview.js"></script>
+    
     <script src="../src/js/jquery.touchclick.js"></script>
     
 		<script>
@@ -46,7 +48,9 @@
 				
 				$('.selectpicker').selectpicker();
 				
-				$("select.selectize", this).selectize();
+				$('.selectize').selectpicker();
+				
+				$('.checkview').checkview();
 
 			});
 			
@@ -58,24 +62,25 @@
 		
 		<header class="subhead" id="overview">
 		  <div class="container">
-		    <h1>TouchClick</h1>
-		    <p class="lead">JQuery-Plugin for generic trigger of click-listeners on touch-events.<br/>
-		    	
+		    <h1>jquery-touchclick</h1>
+		    <p class="lead">Triggers click events on touch-devices
 		    </p>
 		  </div>
 		</header>
 
 
 		<div class="container">
-		  
-		  <h2>Please open this page on a touch-device</h2>
-		  
-		  
-		  <h3>Native form controls</h3>
-		  <div class="row">
-		    <div class="col-md-4">
-		      
-		      <form role="form">
+
+      <div class="row">
+  	    <div class="col-md-4">
+  	      
+  	      <form role="form" class="well">
+  	        
+  	        <p>
+              Link: 
+              <a href="http://google.com">Come back</a>
+            </p>
+  	        
   		      <div class="form-group">
   		        <label>Textfield</label>
   		        <input type="text" class="form-control"/>
@@ -83,62 +88,78 @@
   		      
   		      <div class="form-group">
     		      <select>
-                <option value="volvo">Volvox</option>
-                <option value="saab">Saab</option>
+                <option value="option1">Option 1</option>
+                <option value="option2">Option 2</option>
               </select>
   		      </div>
   		      
   		      <div class="checkbox">
               <label><input type="checkbox"/> Check me</label>
             </div>
-  		      
-  		      
-  		      
+  
             <button type="button" id="button" class="btn btn-primary">Touch me</button>
             
           </form>
           
-		    </div>
-		  </div>
-
-      <p>
-        Link: 
-        <a href="http://google.com">Come back</a>
-      </p>
-      
-
-      <div class="btn-group">
-        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-          Action <span class="caret"></span>
-        </button>
-        <ul class="dropdown-menu" role="menu">
-          <li><a href="#">Action</a></li>
-          <li><a href="#">Another action</a></li>
-          <li><a href="#">Something else here</a></li>
-          <li class="divider"></li>
-          <li><a href="#">Separated link</a></li>
-        </ul>
+  	    </div>
+  		  
+  
+  
+        <div class="col-md-4">
+          
+          <form role="form" class="well">
+            
+            <div class="form-group">
+              
+              <div class="btn-group dropdown">
+                <button type="button" class="btn btn-default dropdown-toggle form-control" data-toggle="dropdown">
+                  Bootstrap Dropdown <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" role="menu">
+                  <li><a href="#">Action</a></li>
+                  <li><a href="#">Another action</a></li>
+                  <li><a href="#">Something else here</a></li>
+                  <li class="divider"></li>
+                  <li><a href="#">Separated link</a></li>
+                </ul>
+              </div>
+              
+            </div>
+            
+            
+            <div class="form-group">
+              <label>Datepicker</label>
+              <input class="datepicker form-control" value="2013-09-12"/>
+            </div>
+            
+            <div class="form-group">
+              <label>Selectpicker</label>
+              <select class="selectpicker form-control">
+                <option value="option1">Option 1</option>
+                <option value="option2">Option 2</option>
+              </select>
+            </div>
+            
+            <div class="form-group">
+              <label>Selectize</label>
+              <select class="selectize form-control" name="test" multiple="multiple">
+                <option value="option1">Option 1</option>
+                <option value="option2">Option 2</option>
+              </select>
+            </div>
+            
+            <div class="checkbox">
+              <label><input type="checkbox" class="checkview"/> Checkview</label>
+            </div>
+  
+          </form>
+          
+        </div>
       </div>
+    </div>
+
       
-      <h3>Bootstrap Datepicker</h3>
-      <input class="datepicker" value="2013-09-12"/>
-      
-      <h3>Bootstrap Selectpicker</h3>
-      <select class="selectpicker">
-        <option value="volvo">Volvox</option>
-        <option value="saab">Saab</option>
-      </select> 
-      
-      <h3>Selectize</h3>
-      <select class="selectize" name="test" multiple="multiple">
-        <option value="Anna">Anna</option>
-        <option value="Bell">Bell</option>
-      </select> 
-    
-      
-      
-      
-		</div>
+		
 		
 	</body>
 </html>
